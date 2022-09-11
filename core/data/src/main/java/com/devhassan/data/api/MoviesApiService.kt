@@ -1,6 +1,5 @@
-package com.devhassan.network.api
+package com.devhassan.data.api
 
-import com.devhassan.network.model.MoviesResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -13,7 +12,7 @@ interface MoviesApiService {
         @Query("page") page: Int?,
         @Query("language") language: String?,
         @Query("region") region: String?
-    ): MoviesResponse
+    ): com.devhassan.data.model.MoviesResponse
 
     @GET(value = "movie/top_rated")
     suspend fun getTopRatedMovies(
@@ -21,7 +20,7 @@ interface MoviesApiService {
         @Query("page") page: Int?,
         @Query("language") language: String?,
         @Query("region") region: String?
-    ): MoviesResponse
+    ): com.devhassan.data.model.MoviesResponse
 
     @GET(value = "movie/upcoming")
     suspend fun getUpcomingMovies(
@@ -29,7 +28,7 @@ interface MoviesApiService {
         @Query("page") page: Int?,
         @Query("language") language: String?,
         @Query("region") region: String?
-    ): MoviesResponse
+    ): com.devhassan.data.model.MoviesResponse
 
     @GET(value = "movie/now_playing")
     suspend fun getNowPlayingMovies(
@@ -37,14 +36,14 @@ interface MoviesApiService {
         @Query("page") page: Int?,
         @Query("language") language: String?,
         @Query("region") region: String?
-    ): MoviesResponse
+    ): com.devhassan.data.model.MoviesResponse
 
     @GET(value = "movie/{movie_id}")
-    suspend fun getMovieById(
+    suspend fun getMovieDetailsById(
         @Path("movie_id") movieId: Long,
         @Query("api_key") apiKey: String?,
         @Query("language") language: String?,
         @Query("append_to_response") appendToResponse: String?
-    ): MovieDetails
+    ): com.devhassan.data.model.DetailsResponse
 
 }

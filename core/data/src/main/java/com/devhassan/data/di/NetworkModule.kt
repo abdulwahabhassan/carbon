@@ -1,7 +1,7 @@
-package com.smartflowtech.cupidcustomerapp.di
+package com.devhassan.data.di
 
 import android.content.Context
-import com.smartflowtech.cupidcustomerapp.network.NetworkConnectivityManager
+import com.devhassan.network.manager.NetworkConnectivityManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.smartflowtech.cupidcustomerapp.data.api
+package com.devhassan.data.model
 
 import com.squareup.moshi.Json
 

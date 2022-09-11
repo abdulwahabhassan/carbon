@@ -1,4 +1,7 @@
 package com.devhassan.data.repository
 
-interface MoviesRepository {
+import javax.inject.Inject
+
+class MoviesRepository @Inject constructor() {
+
 }

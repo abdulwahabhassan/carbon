@@ -1,9 +1,9 @@
-package com.smartflowtech.cupidcustomerapp.di
+package com.devhassan.data.di
 
 
-import com.smartflowtech.cupidcustomerapp.data.api.Api
-import com.smartflowtech.cupidcustomerapp.data.api.CupidApiService
-import com.smartflowtech.cupidcustomerapp.network.NetworkClient
+import com.devhassan.data.api.MoviesApiService
+import com.devhassan.network.client.NetworkClient
+import com.devhassan.network.model.Api
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,8 +16,8 @@ object ApiModule {
     @Provides
     fun providesCupidApiService(
         networkClient: NetworkClient
-    ): CupidApiService {
-        return networkClient.getApiService(Api.Cupid)
+    ): MoviesApiService {
+        return networkClient.getApiService(Api.Prod)
     }
 
 }
