@@ -1,6 +1,6 @@
-package com.devhassan.network
+package com.devhassan.network.client
 
-import com.smartflowtech.cupidcustomerapp.data.api.Api
+import com.devhassan.network.model.Api
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

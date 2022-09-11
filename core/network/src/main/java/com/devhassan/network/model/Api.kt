@@ -1,5 +1,5 @@
-package com.smartflowtech.cupidcustomerapp.data.api
+package com.devhassan.network.model
 
 enum class Api(val baseUrl: String) {
-    Cupid(baseUrl = "https://cupidapi.smartflowtech.com/api/v1/"),
+    Prod(baseUrl = "https://api.themoviedb.org/3/"),
 }

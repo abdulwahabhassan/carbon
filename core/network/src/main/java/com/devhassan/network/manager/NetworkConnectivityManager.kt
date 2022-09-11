@@ -1,4 +1,4 @@
-package com.devhassan.network
+package com.devhassan.network.manager
 
 import android.content.Context
 import android.net.ConnectivityManager
