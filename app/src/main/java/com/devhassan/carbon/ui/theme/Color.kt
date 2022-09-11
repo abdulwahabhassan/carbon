@@ -1,0 +1,27 @@
+package com.devhassan.carbon.ui.theme
+
+import androidx.compose.ui.graphics.Color
+
+val LightPurple = Color(0xFFBB86FC)
+val Purple = Color(0xFF6200EE)
+val DeepPurple = Color(0xFF3700B3)
+val Teal = Color(0xFF03DAC5)
+val DarkBlue = Color(0xFF001B6A)
+val Grey = Color(0xFF666666)
+val TransparentGreen = Color(0xFFCEFFF3)
+val TransparentPurple = Color(0xFFF6EBFF)
+val TransparentYellow = Color(0xFFFEFAE0)
+val TransparentPink = Color(0xFFFFEBEB)
+val TransparentAsh = Color(0xFFD9D9D9)
+val TransparentBlue = Color(0xFFE1FAFF)
+val Pink = Color(0xFFF7DCFB)
+val LightPink = Color(0xFFFDEDFF)
+val Yellow = Color(0xFFF3C583)
+val LightYellow = Color(0xFFFFFAEA)
+val Red = Color(0xFFC9252D)
+val BrightGreen = Color(0xFF17E7B5)
+val Green = Color(0xFF118569)
+val IndicatorGreyInactive = Color(0x4DD9D9D9)
+val IndicatorGreyActive = Color(0xFFD9D9D9)
+val SkyBlue = Color(0xFFDBE5FD)
+val BrightBlue = Color(0xFF1890FF)
