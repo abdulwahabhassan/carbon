@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.devhassan.carbon"
         minSdk 23
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -48,7 +48,12 @@ android {
 }
 
 dependencies {
-
+    implementation(project(":feature:movies"))
+    implementation(project(":feature:details"))
+    implementation(project(":core:data"))
+    implementation(project(":core:database"))
+    implementation(project(":core:model"))
+    implementation(project(":core:network"))
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.material:material:$compose_version"
