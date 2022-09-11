@@ -1,7 +1,7 @@
-package com.smartflowtech.cupidcustomerapp.di
+package com.devhassan.database.di
 
 import android.content.Context
-import com.smartflowtech.cupidcustomerapp.database.AppRoomDatabase
+import com.devhassan.database.AppRoomDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

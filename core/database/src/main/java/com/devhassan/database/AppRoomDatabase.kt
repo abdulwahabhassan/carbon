@@ -1,16 +1,24 @@
-package com.smartflowtech.cupidcustomerapp.database
+package com.devhassan.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.devhassan.database.dao.DetailsEntityDao
+import com.devhassan.database.dao.MovieEntityDao
+import com.devhassan.database.entity.DetailsEntity
+import com.devhassan.database.entity.MovieEntity
 
 @Database(
-    entities = [TransactionEntity::class],
+    entities = [MovieEntity::class, DetailsEntity::class],
     version = 1,
     exportSchema = false
 )
 public abstract class AppRoomDatabase : RoomDatabase() {
+
+    abstract fun moviesEntityDao(): MovieEntityDao
+
+    abstract fun detailsEntityDao(): DetailsEntityDao
 
     companion object {
         @Volatile
