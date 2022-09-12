@@ -3,7 +3,6 @@ package com.devhassan.model
 data class Details (
     val adult: Boolean,
     val backdropPath: String,
-    val belongsToCollection: Any? = null,
     val budget: Long,
     val genres: List<Genre>,
     val homepage: String,
@@ -15,7 +14,6 @@ data class Details (
     val popularity: Double,
     val posterPath: String,
     val productionCompanies: List<ProductionCompany>,
-    val productionCountries: List<ProductionCountry>,
     val releaseDate: String,
     val revenue: Long,
     val runtime: Long,
@@ -40,10 +38,6 @@ data class ProductionCompany (
     val originCountry: String
 )
 
-data class ProductionCountry (
-    val iso3166_1: String,
-    val name: String
-)
 
 data class SpokenLanguage (
     val englishName: String,

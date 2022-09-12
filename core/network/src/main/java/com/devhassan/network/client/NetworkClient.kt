@@ -1,6 +1,8 @@
 package com.devhassan.network.client
 
+import com.devhassan.network.BuildConfig
 import com.devhassan.network.model.Api
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -16,9 +18,27 @@ class NetworkClient @Inject constructor (
         this.level = HttpLoggingInterceptor.Level.BODY
     }
 
+    private val requestInterceptor by lazy {
+        Interceptor { chain ->
+            val url = chain.request()
+                .url
+                .newBuilder()
+                .addQueryParameter("api_key", BuildConfig.MOVIES_API_KEY)
+                .build()
+
+            val request = chain.request()
+                .newBuilder()
+                .url(url)
+                .build()
+
+            return@Interceptor chain.proceed(request)
+        }
+    }
+
     private val okHttpClient by lazy {
         OkHttpClient.Builder().apply {
             this
+                .addInterceptor(requestInterceptor)
                 .addInterceptor(loggerInterceptor)
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)

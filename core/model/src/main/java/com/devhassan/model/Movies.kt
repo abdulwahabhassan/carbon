@@ -16,7 +16,6 @@ data class Dates (
 data class Movie (
     val adult: Boolean,
     val backdropPath: String,
-    val genreIDS: List<Long>,
     val id: Long,
     val originalLanguage: String,
     val originalTitle: String,

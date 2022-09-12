@@ -7,7 +7,7 @@ import com.devhassan.database.entity.LocalDetailsEntity
 import com.devhassan.database.entity.LocalMovieEntity
 import javax.inject.Inject
 
-class LocalDataSrc @Inject constructor(
+class LocalDataSource @Inject constructor(
     private val moviesEntityDao: MovieEntityDao,
     private val detailsEntityDao: DetailsEntityDao
 ) : MoviesDataSrc<List<LocalMovieEntity>, LocalDetailsEntity> {
@@ -16,7 +16,7 @@ class LocalDataSrc @Inject constructor(
         return moviesEntityDao.getMoviesByCategory(category)
     }
 
-    override suspend fun fetchMovieDetails(id: Long): LocalDetailsEntity {
+    override suspend fun fetchMovieDetails(id: Long): LocalDetailsEntity? {
         return detailsEntityDao.getMovieDetailsById(id)
     }
 

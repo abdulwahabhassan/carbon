@@ -3,9 +3,13 @@ package com.devhassan.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.devhassan.database.converter.Converter
+import com.devhassan.model.*
 
 @Entity(tableName = "details")
-data class DetailsEntity(
+@TypeConverters(Converter::class)
+data class LocalDetailsEntity(
     @PrimaryKey
     val id: Long,
     val adult: Boolean,
@@ -35,9 +39,6 @@ data class DetailsEntity(
     @ColumnInfo(name = "production_companies")
     val productionCompanies: List<ProductionCompanyEntity>,
 
-    @ColumnInfo(name = "production_countries")
-    val productionCountries: List<ProductionCountryEntity>,
-
     @ColumnInfo(name = "release_date")
     val releaseDate: String,
 
@@ -57,12 +58,48 @@ data class DetailsEntity(
 
     @ColumnInfo(name = "vote_count")
     val voteCount: Long
-)
+) {
+    fun toDataModel(): Details {
+        return Details(
+            this.adult,
+            this.backdropPath,
+            this.budget,
+            this.genres.map { genreEntity -> genreEntity.toDataModel() },
+            this.homepage,
+            this.id,
+            this.imdbID,
+            this.originalLanguage,
+            this.originalTitle,
+            this.overview,
+            this.popularity,
+            this.posterPath,
+            this.productionCompanies.map { productCompanyEntity ->
+                productCompanyEntity.toDataModel()
+            },
+            this.releaseDate,
+            this.revenue,
+            this.runtime,
+            this.spokenLanguages.map { spokenLanguageEntity ->
+                spokenLanguageEntity.toDataModel()
+            },
+            this.status,
+            this.tagline,
+            this.originalTitle,
+            this.video,
+            this.voteAverage,
+            this.voteCount
+        )
+    }
+}
 
 data class GenreEntity(
     val id: Long,
     val name: String
-)
+) {
+    fun toDataModel(): Genre {
+        return Genre(this.id, this.name)
+    }
+}
 
 data class ProductionCompanyEntity(
     val id: Long,
@@ -74,14 +111,16 @@ data class ProductionCompanyEntity(
 
     @ColumnInfo(name = "origin_country")
     val originCountry: String
-)
-
-data class ProductionCountryEntity(
-    @ColumnInfo(name = "iso_3166_1")
-    val iso3166_1: String,
-
-    val name: String
-)
+) {
+    fun toDataModel(): ProductionCompany {
+        return ProductionCompany(
+            this.id,
+            this.logoPath,
+            this.name,
+            this.originCountry
+        )
+    }
+}
 
 data class SpokenLanguageEntity(
     @ColumnInfo(name = "english_name")
@@ -91,4 +130,12 @@ data class SpokenLanguageEntity(
     val iso639_1: String,
 
     val name: String
-)
+) {
+    fun toDataModel(): SpokenLanguage {
+        return SpokenLanguage(
+            this.englishName,
+            this.iso639_1,
+            this.name
+        )
+    }
+}

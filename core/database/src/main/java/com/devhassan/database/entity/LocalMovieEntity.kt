@@ -1,11 +1,15 @@
 package com.devhassan.database.entity
 
+
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.TypeConverters
+import com.devhassan.database.converter.Converter
+import com.devhassan.model.Movie
 
 @Entity(tableName = "movie")
-data class MovieEntity(
+data class LocalMovieEntity(
     @PrimaryKey
     val id: Long,
     val adult: Boolean,
@@ -39,4 +43,23 @@ data class MovieEntity(
 
     @ColumnInfo(name = "category")
     val category: String
-)
+) {
+    fun toDataModel(): Movie {
+        return Movie(
+            this.adult,
+            this.backdropPath,
+            this.id,
+            this.originalLanguage,
+            this.originalTitle,
+            this.overview,
+            this.popularity,
+            this.posterPath,
+            this.releaseDate,
+            this.title,
+            this.video,
+            this.voteAverage,
+            this.voteCount
+        )
+
+    }
+}

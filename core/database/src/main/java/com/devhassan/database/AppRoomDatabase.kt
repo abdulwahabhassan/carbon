@@ -6,11 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.devhassan.database.dao.DetailsEntityDao
 import com.devhassan.database.dao.MovieEntityDao
-import com.devhassan.database.entity.DetailsEntity
-import com.devhassan.database.entity.MovieEntity
+import com.devhassan.database.entity.LocalDetailsEntity
+import com.devhassan.database.entity.LocalMovieEntity
 
 @Database(
-    entities = [MovieEntity::class, DetailsEntity::class],
+    entities = [LocalMovieEntity::class, LocalDetailsEntity::class],
     version = 1,
     exportSchema = false
 )

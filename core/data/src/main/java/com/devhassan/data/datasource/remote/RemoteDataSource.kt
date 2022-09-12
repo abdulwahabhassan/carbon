@@ -6,7 +6,7 @@ import com.devhassan.data.model.RemoteDetailsResponse
 import com.devhassan.data.model.RemoteMoviesResponse
 import javax.inject.Inject
 
-class RemoteDataSrc @Inject constructor(
+class RemoteDataSource @Inject constructor(
     private val apiService: MoviesApiService
 ) : MoviesDataSrc<RemoteMoviesResponse, RemoteDetailsResponse> {
 

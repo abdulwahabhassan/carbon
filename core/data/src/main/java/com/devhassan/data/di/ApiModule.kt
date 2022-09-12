@@ -14,7 +14,7 @@ import dagger.hilt.components.SingletonComponent
 object ApiModule {
 
     @Provides
-    fun providesCupidApiService(
+    fun providesMoviesApiService(
         networkClient: NetworkClient
     ): MoviesApiService {
         return networkClient.getApiService(Api.Prod)

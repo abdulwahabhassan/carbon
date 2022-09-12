@@ -1,9 +1,10 @@
 package com.devhassan.data.model
 
+import com.devhassan.model.*
 import com.squareup.moshi.Json
 
 
-data class DetailsResponse (
+data class RemoteDetailsResponse(
     val adult: Boolean,
 
     @Json(name = "backdrop_path")
@@ -13,7 +14,7 @@ data class DetailsResponse (
     val belongsToCollection: Any? = null,
 
     val budget: Long,
-    val genres: List<Genre>,
+    val genres: List<RemoteGenre>,
     val homepage: String,
     val id: Long,
 
@@ -33,10 +34,7 @@ data class DetailsResponse (
     val posterPath: String,
 
     @Json(name = "production_companies")
-    val productionCompanies: List<ProductionCompany>,
-
-    @Json(name = "production_countries")
-    val productionCountries: List<ProductionCountry>,
+    val productionCompanies: List<RemoteProductionCompany>,
 
     @Json(name = "release_date")
     val releaseDate: String,
@@ -45,7 +43,7 @@ data class DetailsResponse (
     val runtime: Long,
 
     @Json(name = "spoken_languages")
-    val spokenLanguages: List<SpokenLanguage>,
+    val spokenLanguages: List<RemoteSpokenLanguage>,
 
     val status: String,
     val tagline: String,
@@ -57,14 +55,50 @@ data class DetailsResponse (
 
     @Json(name = "vote_count")
     val voteCount: Long
-)
+) {
+    fun toDataModel(): Details {
+        return Details(
+            this.adult,
+            this.backdropPath,
+            this.budget,
+            this.genres.map { remoteGenre -> remoteGenre.toDataModel() },
+            this.homepage,
+            this.id,
+            this.imdbID,
+            this.originalLanguage,
+            this.originalTitle,
+            this.overview,
+            this.popularity,
+            this.posterPath,
+            this.productionCompanies.map { remoteProductionCompany ->
+                remoteProductionCompany.toDataModel()
+            },
+            this.releaseDate,
+            this.revenue,
+            this.runtime,
+            this.spokenLanguages.map { remoteSpokenLanguage ->
+                remoteSpokenLanguage.toDataModel()
+            },
+            this.status,
+            this.tagline,
+            this.originalTitle,
+            this.video,
+            this.voteAverage,
+            this.voteCount
+        )
+    }
+}
 
-data class Genre (
+data class RemoteGenre(
     val id: Long,
     val name: String
-)
+) {
+    fun toDataModel(): Genre {
+        return Genre(this.id, this.name)
+    }
+}
 
-data class ProductionCompany (
+data class RemoteProductionCompany(
     val id: Long,
 
     @Json(name = "logo_path")
@@ -74,16 +108,19 @@ data class ProductionCompany (
 
     @Json(name = "origin_country")
     val originCountry: String
-)
+) {
+    fun toDataModel(): ProductionCompany {
+        return ProductionCompany(
+            this.id,
+            this.logoPath,
+            this.name,
+            this.originCountry
+        )
+    }
+}
 
-data class ProductionCountry (
-    @Json(name = "iso_3166_1")
-    val iso3166_1: String,
 
-    val name: String
-)
-
-data class SpokenLanguage (
+data class RemoteSpokenLanguage(
     @Json(name = "english_name")
     val englishName: String,
 
@@ -91,4 +128,12 @@ data class SpokenLanguage (
     val iso639_1: String,
 
     val name: String
-)
+) {
+    fun toDataModel(): SpokenLanguage {
+        return SpokenLanguage(
+            this.englishName,
+            this.iso639_1,
+            this.name
+        )
+    }
+}

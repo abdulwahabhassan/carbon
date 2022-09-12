@@ -1,7 +1,7 @@
 package com.devhassan.data.repository
 
 import com.devhassan.common.result.NetworkResult
-import com.devhassan.data.model.ErrorResponse
+import com.devhassan.data.model.RemoteErrorResponse
 import com.devhassan.network.manager.NetworkConnectivityManager
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -36,13 +36,13 @@ open class BaseRepository {
         }
     }
 
-    private fun handleHttpException(e: HttpException): ErrorResponse? {
+    private fun handleHttpException(e: HttpException): RemoteErrorResponse? {
         return try {
             e.response()?.errorBody()?.source()?.let {
                 val moshiAdapter = Moshi.Builder()
                     .addLast(KotlinJsonAdapterFactory())
                     .build()
-                    .adapter(ErrorResponse::class.java)
+                    .adapter(RemoteErrorResponse::class.java)
                 moshiAdapter.fromJson(it)
             }
         } catch (t: Throwable) {

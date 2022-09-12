@@ -1,11 +1,12 @@
 package com.devhassan.data.model
 
+import com.devhassan.model.Movie
 import com.squareup.moshi.Json
 
-data class MoviesResponse(
-    val dates: Dates,
+data class RemoteMoviesResponse(
+    val remoteDate: RemoteDate,
     val page: Long,
-    val results: List<Movie>,
+    val results: List<RemoteMovie>,
 
     @Json(name = "total_pages")
     val totalPages: Long,
@@ -14,19 +15,16 @@ data class MoviesResponse(
     val totalResults: Long
 )
 
-data class Dates (
+data class RemoteDate(
     val maximum: String,
     val minimum: String
 )
 
-data class Movie (
+data class RemoteMovie(
     val adult: Boolean,
 
     @Json(name = "backdrop_path")
     val backdropPath: String,
-
-    @Json(name = "genre_ids")
-    val genreIDS: List<Long>,
 
     val id: Long,
 
@@ -53,4 +51,22 @@ data class Movie (
 
     @Json(name = "vote_count")
     val voteCount: Long
-)
+) {
+    fun toDataModel(): Movie {
+        return Movie(
+            this.adult,
+            this.backdropPath,
+            this.id,
+            this.originalLanguage,
+            this.originalTitle,
+            this.overview,
+            this.popularity,
+            this.posterPath,
+            this.releaseDate,
+            this.title,
+            this.video,
+            this.voteAverage,
+            this.voteCount
+        )
+    }
+}

@@ -1,14 +1,12 @@
 package com.devhassan.data.datasource
 
-interface MoviesDataSrc {
+import com.devhassan.model.Details
+import com.devhassan.model.Movie
 
-    suspend fun fetchPopularMovies(): List<Any>
 
-    suspend fun fetchTopRatedMovies(): List<Any>
+interface MoviesDataSrc<T, K> {
 
-    suspend fun fetchUpcomingMovies(): List<Any>
+    suspend fun fetchMovies(category: String): T
 
-    suspend fun fetchNowPlayingMovies(): List<Any>
-
-    suspend fun fetchMovieDetails(): List<Any>
+    suspend fun fetchMovieDetails(id: Long): K?
 }
