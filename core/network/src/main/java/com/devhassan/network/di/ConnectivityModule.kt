@@ -1,4 +1,4 @@
-package com.devhassan.data.di
+package com.devhassan.network.di
 
 import android.content.Context
 import com.devhassan.network.manager.NetworkConnectivityManager
@@ -23,11 +23,4 @@ object NetworkModule {
         return NetworkConnectivityManager(appContext)
     }
 
-    @Provides
-    @Singleton
-    fun providesDispatcherIO(
-        @ApplicationContext appContext: Context
-    ): CoroutineDispatcher {
-        return Dispatchers.IO
-    }
 }
