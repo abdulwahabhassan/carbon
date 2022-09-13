@@ -1,4 +1,4 @@
-package com.devhassan.carbon.ui.theme
+package com.devhassan.carbon.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

@@ -1,6 +1,6 @@
 package com.devhassan.data.model
 
-import com.devhassan.model.Movie
+import com.devhassan.model.DomainMovie
 import com.squareup.moshi.Json
 
 data class RemoteMoviesResponse(
@@ -52,8 +52,8 @@ data class RemoteMovie(
     @Json(name = "vote_count")
     val voteCount: Long
 ) {
-    fun toDataModel(): Movie {
-        return Movie(
+    fun toDomainModel(): DomainMovie {
+        return DomainMovie(
             this.adult,
             this.backdropPath,
             this.id,

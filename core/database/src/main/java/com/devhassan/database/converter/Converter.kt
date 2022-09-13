@@ -15,7 +15,7 @@ class Converter @Inject constructor (
     private val moshi: Moshi
 ) {
 
-    //Genre Entity Converter
+    //DomainGenre Entity Converter
     @TypeConverter
     fun fromListOfGenreEntity(value: List<GenreEntity>?): String? {
         val listType = object : TypeToken<List<GenreEntity?>?>() {}.type

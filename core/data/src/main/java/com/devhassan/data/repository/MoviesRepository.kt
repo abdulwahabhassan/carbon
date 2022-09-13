@@ -28,7 +28,7 @@ class MoviesRepository @Inject constructor(
                 Timber.d("Success -> ${networkResult.payload}")
                 RepositoryResult.Remote(
                     data = networkResult.payload.results.map { remoteMovie ->
-                        remoteMovie.toDataModel()
+                        remoteMovie.toDomainModel()
                     }
                 )
             }
@@ -39,7 +39,7 @@ class MoviesRepository @Inject constructor(
                     RepositoryResult.Error(networkResult.message)
                 } else {
                     RepositoryResult.Local(localResult.map { localMovieEntity ->
-                        localMovieEntity.toDataModel()
+                        localMovieEntity.toDomainModel()
                     })
                 }
             }

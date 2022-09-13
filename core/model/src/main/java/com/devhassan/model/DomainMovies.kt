@@ -1,19 +1,19 @@
 package com.devhassan.model
 
-data class MoviesResponse(
-    val dates: Dates,
+data class DomainMovies(
+    val domainDates: DomainDates,
     val page: Long,
-    val results: List<Movie>,
+    val results: List<DomainMovie>,
     val totalPages: Long,
     val totalResults: Long
 )
 
-data class Dates (
+data class DomainDates (
     val maximum: String,
     val minimum: String
 )
 
-data class Movie (
+data class DomainMovie (
     val adult: Boolean,
     val backdropPath: String,
     val id: Long,

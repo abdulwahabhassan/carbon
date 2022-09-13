@@ -1,10 +1,10 @@
 package com.devhassan.model
 
-data class Details (
+data class DomainDetails (
     val adult: Boolean,
     val backdropPath: String,
     val budget: Long,
-    val genres: List<Genre>,
+    val domainGenres: List<DomainGenre>,
     val homepage: String,
     val id: Long,
     val imdbID: String,
@@ -13,11 +13,11 @@ data class Details (
     val overview: String,
     val popularity: Double,
     val posterPath: String,
-    val productionCompanies: List<ProductionCompany>,
+    val productionCompanies: List<DomainProductionCompany>,
     val releaseDate: String,
     val revenue: Long,
     val runtime: Long,
-    val spokenLanguages: List<SpokenLanguage>,
+    val domainSpokenLanguages: List<DomainSpokenLanguage>,
     val status: String,
     val tagline: String,
     val title: String,
@@ -26,12 +26,12 @@ data class Details (
     val voteCount: Long
 )
 
-data class Genre (
+data class DomainGenre (
     val id: Long,
     val name: String
 )
 
-data class ProductionCompany (
+data class DomainProductionCompany (
     val id: Long,
     val logoPath: String? = null,
     val name: String,
@@ -39,7 +39,7 @@ data class ProductionCompany (
 )
 
 
-data class SpokenLanguage (
+data class DomainSpokenLanguage (
     val englishName: String,
     val iso639_1: String,
     val name: String

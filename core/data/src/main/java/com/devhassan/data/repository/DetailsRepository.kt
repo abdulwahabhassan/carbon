@@ -5,7 +5,6 @@ import com.devhassan.common.result.RepositoryResult
 import com.devhassan.data.datasource.local.LocalDataSource
 import com.devhassan.data.datasource.remote.RemoteDataSource
 import com.devhassan.database.entity.LocalDetailsEntity
-import com.devhassan.database.entity.LocalMovieEntity
 import com.devhassan.network.manager.NetworkConnectivityManager
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
@@ -28,7 +27,7 @@ class DetailsRepository @Inject constructor(
             is NetworkResult.Success -> {
                 Timber.d("Success -> ${networkResult.payload}")
                 RepositoryResult.Remote(
-                    data = networkResult.payload.toDataModel()
+                    data = networkResult.payload.toDomainModel()
                 )
             }
             is NetworkResult.Error -> {
@@ -38,7 +37,7 @@ class DetailsRepository @Inject constructor(
                 if (localResult == null) {
                     RepositoryResult.Error(networkResult.message)
                 } else {
-                    RepositoryResult.Local(localResult.toDataModel())
+                    RepositoryResult.Local(localResult.toDomainModel())
                 }
             }
         }

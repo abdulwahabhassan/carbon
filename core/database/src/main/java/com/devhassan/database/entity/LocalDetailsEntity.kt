@@ -59,12 +59,12 @@ data class LocalDetailsEntity(
     @ColumnInfo(name = "vote_count")
     val voteCount: Long
 ) {
-    fun toDataModel(): Details {
-        return Details(
+    fun toDomainModel(): DomainDetails {
+        return DomainDetails(
             this.adult,
             this.backdropPath,
             this.budget,
-            this.genres.map { genreEntity -> genreEntity.toDataModel() },
+            this.genres.map { genreEntity -> genreEntity.toDomainModel() },
             this.homepage,
             this.id,
             this.imdbID,
@@ -74,13 +74,13 @@ data class LocalDetailsEntity(
             this.popularity,
             this.posterPath,
             this.productionCompanies.map { productCompanyEntity ->
-                productCompanyEntity.toDataModel()
+                productCompanyEntity.toDomainModel()
             },
             this.releaseDate,
             this.revenue,
             this.runtime,
             this.spokenLanguages.map { spokenLanguageEntity ->
-                spokenLanguageEntity.toDataModel()
+                spokenLanguageEntity.toDomainModel()
             },
             this.status,
             this.tagline,
@@ -96,8 +96,8 @@ data class GenreEntity(
     val id: Long,
     val name: String
 ) {
-    fun toDataModel(): Genre {
-        return Genre(this.id, this.name)
+    fun toDomainModel(): DomainGenre {
+        return DomainGenre(this.id, this.name)
     }
 }
 
@@ -112,8 +112,8 @@ data class ProductionCompanyEntity(
     @ColumnInfo(name = "origin_country")
     val originCountry: String
 ) {
-    fun toDataModel(): ProductionCompany {
-        return ProductionCompany(
+    fun toDomainModel(): DomainProductionCompany {
+        return DomainProductionCompany(
             this.id,
             this.logoPath,
             this.name,
@@ -131,8 +131,8 @@ data class SpokenLanguageEntity(
 
     val name: String
 ) {
-    fun toDataModel(): SpokenLanguage {
-        return SpokenLanguage(
+    fun toDomainModel(): DomainSpokenLanguage {
+        return DomainSpokenLanguage(
             this.englishName,
             this.iso639_1,
             this.name

@@ -4,9 +4,7 @@ package com.devhassan.database.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.devhassan.database.converter.Converter
-import com.devhassan.model.Movie
+import com.devhassan.model.DomainMovie
 
 @Entity(tableName = "movie")
 data class LocalMovieEntity(
@@ -44,8 +42,8 @@ data class LocalMovieEntity(
     @ColumnInfo(name = "category")
     val category: String
 ) {
-    fun toDataModel(): Movie {
-        return Movie(
+    fun toDomainModel(): DomainMovie {
+        return DomainMovie(
             this.adult,
             this.backdropPath,
             this.id,
