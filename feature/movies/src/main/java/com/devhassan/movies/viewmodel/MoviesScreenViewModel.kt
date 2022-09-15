@@ -10,7 +10,9 @@ import com.devhassan.common.result.ViewModelResult
 import com.devhassan.data.repository.MoviesRepository
 import com.devhassan.movies.model.MoviesScreenUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -50,6 +52,7 @@ class MoviesScreenViewModel @Inject constructor(
                     )
                 }
                 is RepositoryResult.Remote -> {
+                    Timber.d("vm ${result.data.toString()}")
                     moviesScreenUiState = MoviesScreenUiState(
                         ViewModelResult.SUCCESS,
                         result.data,

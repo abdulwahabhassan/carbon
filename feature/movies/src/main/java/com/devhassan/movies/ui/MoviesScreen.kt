@@ -2,15 +2,21 @@ package com.devhassan.movies.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Favorite
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,30 +26,33 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.compose.rememberAsyncImagePainter
+import com.devhassan.common.Extension.capitalizeEachWord
 import com.devhassan.common.result.ViewModelResult
 import com.devhassan.designsystem.R
 import com.devhassan.designsystem.ui.theme.*
+import com.devhassan.model.Category
 import com.devhassan.movies.model.MoviesScreenUiState
 import com.devhassan.movies.viewmodel.MoviesScreenViewModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Composable
 fun MoviesRoute(
     viewModel: MoviesScreenViewModel = hiltViewModel(),
-//    navigationDestination: (CarbonNavigationDestination, String) -> Unit
+    navigateToDetails: (String) -> Unit,
     onLoadingStateActive: (Boolean) -> Unit
 ) {
     MoviesScreen(
         getMovies = viewModel::getMovies,
         moviesScreenUiState = viewModel.moviesScreenUiState,
-//        navigationDestination = navigationDestination
+        navigateToDetails = navigateToDetails,
         onLoadingStateActive = onLoadingStateActive
     )
 }
@@ -53,12 +62,13 @@ fun MoviesRoute(
 fun MoviesScreen(
     getMovies: (String) -> Unit,
     moviesScreenUiState: MoviesScreenUiState,
-    onLoadingStateActive: (Boolean) -> Unit
-//    navigationDestination: (CarbonNavigationDestination, String) -> Unit
+    onLoadingStateActive: (Boolean) -> Unit,
+    navigateToDetails: (String) -> Unit,
 ) {
 
     val lazyGridState = rememberLazyGridState()
     val movies = moviesScreenUiState.movies?.collectAsLazyPagingItems()
+    val showFilterOptions = rememberSaveable { mutableStateOf(false) }
 
     onLoadingStateActive(
         movies?.loadState?.append == LoadState.Loading ||
@@ -67,19 +77,57 @@ fun MoviesScreen(
 
     when (moviesScreenUiState.viewModelResult) {
         ViewModelResult.SUCCESS -> {
-            Box(modifier = Modifier.fillMaxSize()) {
+
+            Column(modifier = Modifier.fillMaxSize()) {
+                moviesScreenUiState.category?.capitalizeEachWord()?.let {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(
+                                color = transparentPurple,
+                            )
+                            .padding(vertical = 4.dp, horizontal = 8.dp),
+                        horizontalArrangement = Arrangement.End,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            text = it,
+                            color = purple,
+                            style = MaterialTheme.typography.h5
+                        )
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Icon(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .clip(CircleShape)
+                                .clickable {
+                                    showFilterOptions.value = true
+                                }
+                                .padding(6.dp),
+                            painter = painterResource(id = R.drawable.ic_filter),
+                            contentDescription = "Filter",
+                            tint = purple
+                        )
+                    }
+                }
+
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
                     modifier = Modifier.fillMaxSize(),
                     state = lazyGridState,
                     contentPadding = PaddingValues(4.dp)
                 ) {
+
                     items(movies?.itemCount ?: 0) { movieIndex ->
                         movies?.get(movieIndex)?.let { movie ->
                             Card(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .padding(horizontal = 4.dp, vertical = 4.dp), onClick = {}, shape = RoundedCornerShape(10.dp)
+                                    .padding(horizontal = 4.dp, vertical = 4.dp),
+                                onClick = {
+                                    navigateToDetails(movieIndex.toString())
+                                },
+                                shape = RoundedCornerShape(10.dp)
                             ) {
                                 Column(
                                     verticalArrangement = Arrangement.Top,
@@ -210,62 +258,65 @@ fun MoviesScreen(
             }
         }
     }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun MovieScreenPreview() {
-//    MoviesScreen(
-//        getMovies = { category -> },
-//        moviesScreenUiState = MoviesScreenUiState(
-//            ViewModelResult.SUCCESS, listOf(
-//                DomainMovie(
-//                    true,
-//                    "",
-//                    1,
-//                    "English",
-//                    "Some Title",
-//                    "Some random overview of the movie",
-//                    4.00,
-//                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_JRWUb65vA4_cUXaOwOFzlhB-npSVSf_G8eZAAY8Zf4fAx604Uhq3_lvqWyP0zufjjlM&usqp=CAU",
-//                    "2022-10-11",
-//                    "",
-//                    true,
-//                    1.00,
-//                    100
-//                ),
-//                DomainMovie(
-//                    false,
-//                    "",
-//                    2,
-//                    "French",
-//                    "Another Title to show",
-//                    "Some random overview of the movie",
-//                    5.00,
-//                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_JRWUb65vA4_cUXaOwOFzlhB-npSVSf_G8eZAAY8Zf4fAx604Uhq3_lvqWyP0zufjjlM&usqp=CAU",
-//                    "2022-09-01",
-//                    "",
-//                    true,
-//                    1.00,
-//                    50
-//                ),
-//                DomainMovie(
-//                    false,
-//                    "",
-//                    3,
-//                    "Aussie",
-//                    "Glory days",
-//                    "Some random overview of the movie",
-//                    5.00,
-//                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_JRWUb65vA4_cUXaOwOFzlhB-npSVSf_G8eZAAY8Zf4fAx604Uhq3_lvqWyP0zufjjlM&usqp=CAU",
-//                    "2022-04-23",
-//                    "",
-//                    true,
-//                    1.00,
-//                    50
-//                )
-//            ),
-//            message = "Check your internet connection"
-//        )
-//    )
+    if (showFilterOptions.value) {
+        Dialog(
+            onDismissRequest = { showFilterOptions.value = false },
+        ) {
+            LazyColumn(
+                modifier = Modifier
+                    .background(
+                        color = Color.White,
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    .padding(horizontal = 12.dp, vertical = 24.dp)
+
+            ) {
+                item {
+                    Text(
+                        text = "See what's trending..",
+                        textAlign = TextAlign.Start,
+                        modifier = Modifier
+                            .padding(vertical = 4.dp)
+                            .fillMaxWidth()
+                            .padding(top = 2.dp, bottom = 8.dp, start = 12.dp, end = 12.dp),
+                        color = black,
+                        style = MaterialTheme.typography.body1,
+                        fontWeight = FontWeight.Bold,
+                    )
+                }
+
+                items(
+                    listOf(
+                        Category.NOW_PLAYING,
+                        Category.POPULAR,
+                        Category.TOP_RATED
+                    )
+                ) { category ->
+                    Text(
+                        text = category.name.capitalizeEachWord(),
+                        textAlign = TextAlign.End,
+                        modifier = Modifier
+                            .padding(vertical = 4.dp)
+                            .fillMaxWidth()
+                            .background(
+                                color = transparentPurple,
+                                shape = RoundedCornerShape(50)
+                            )
+                            .clip(RoundedCornerShape(50))
+                            .clickable {
+                                getMovies(category.name.lowercase(Locale.getDefault()))
+                                showFilterOptions.value = false
+                            }
+                            .padding(vertical = 6.dp, horizontal = 12.dp),
+                        color = purple,
+                        style = MaterialTheme.typography.h5
+                    )
+                }
+
+            }
+
+        }
+    }
+
 }

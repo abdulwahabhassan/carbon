@@ -1,4 +1,4 @@
-package com.devhassan.common.di
+package com.devhassan.network.di
 
 import android.content.Context
 import dagger.Module

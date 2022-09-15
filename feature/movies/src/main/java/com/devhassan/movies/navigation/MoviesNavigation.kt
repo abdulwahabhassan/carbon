@@ -11,12 +11,12 @@ object MoviesDestination: CarbonNavigationDestination {
 }
 
 fun NavGraphBuilder.moviesNavigationGraph(
-//    navigateToDestination: (CarbonNavigationDestination, String) -> Unit
+    navigateToDetails: (String) -> Unit,
     onLoadingStateActive: (Boolean) -> Unit
 ) {
     composable(route = MoviesDestination.route) {
         MoviesRoute(
-//            navigationDestination = navigateToDestination
+            navigateToDetails = navigateToDetails,
             onLoadingStateActive = onLoadingStateActive
         )
     }

@@ -5,6 +5,7 @@ import com.squareup.moshi.Json
 
 data class RemoteMoviesResponse(
     val page: Long,
+    @Json(name = "results")
     val results: List<RemoteMovie>,
 
     @Json(name = "total_pages")
@@ -47,6 +48,7 @@ data class RemoteMovie(
     val voteCount: Long
 ) {
     fun toDomainModel(): DomainMovie {
+
         return DomainMovie(
             this.adult,
             this.backdropPath,

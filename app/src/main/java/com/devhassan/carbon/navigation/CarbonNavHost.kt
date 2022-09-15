@@ -1,9 +1,9 @@
 package com.devhassan.carbon.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.devhassan.details.navigation.DetailsDestination
 import com.devhassan.details.navigation.detailsNavigationGraph
 import com.devhassan.movies.navigation.MoviesDestination
 import com.devhassan.movies.navigation.moviesNavigationGraph
@@ -22,7 +22,13 @@ fun CarbonNavHost(
         startDestination = startDestination,
     ) {
         moviesNavigationGraph(
-            onLoadingStateActive = onLoadingStateActive
+            onLoadingStateActive = onLoadingStateActive,
+            navigateToDetails = { movieId ->
+                onNavigateToDestination(
+                    DetailsDestination,
+                    DetailsDestination.createNavigationRoute(movieId)
+                )
+            }
         )
         detailsNavigationGraph()
     }

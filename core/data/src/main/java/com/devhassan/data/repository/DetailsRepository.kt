@@ -23,15 +23,12 @@ class DetailsRepository @Inject constructor(
             }
         ) {
             is NetworkResult.Success -> {
-                Timber.d("Success -> ${networkResult.payload}")
                 RepositoryResult.Remote(
                     data = networkResult.payload.toDomainModel()
                 )
             }
             is NetworkResult.Error -> {
-                Timber.d("Error -> ${networkResult.message}")
                 val localResult = localDataSource.fetchMovieDetails(id)
-
                 if (localResult == null) {
                     RepositoryResult.Error(networkResult.message)
                 } else {

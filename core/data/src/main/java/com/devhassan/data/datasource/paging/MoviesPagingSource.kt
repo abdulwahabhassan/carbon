@@ -28,21 +28,15 @@ class MoviesPagingSource(
                 nextKey = if (moviesResponse.results.isEmpty()) {
                     null
                 } else {
-                    // initial load size = 3 * NETWORK_PAGE_SIZE by default
-                    // ensure we're not requesting duplicating items, at the 2nd request
                     page + (params.loadSize / Constants.NETWORK_PAGE_SIZE)
                 }
             )
-        } catch (e: HttpException) {
-            LoadResult.Error(e)
         }
         catch (e: Exception) {
             LoadResult.Error(e)
         }
     }
 
-    // The refresh key is used for subsequent refresh calls to PagingSource.load after the initial load
-    //If the correct Key cannot be determined, null can be returned to allow load decide what default key to use
     override fun getRefreshKey(state: PagingState<Int, RemoteMovie>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
