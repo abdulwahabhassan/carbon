@@ -4,7 +4,6 @@ import com.devhassan.model.DomainMovie
 import com.squareup.moshi.Json
 
 data class RemoteMoviesResponse(
-    val remoteDate: RemoteDate,
     val page: Long,
     val results: List<RemoteMovie>,
 
@@ -13,11 +12,6 @@ data class RemoteMoviesResponse(
 
     @Json(name = "total_results")
     val totalResults: Long
-)
-
-data class RemoteDate(
-    val maximum: String,
-    val minimum: String
 )
 
 data class RemoteMovie(
@@ -61,7 +55,7 @@ data class RemoteMovie(
             this.originalTitle,
             this.overview,
             this.popularity,
-            this.posterPath,
+            "https://image.tmdb.org/t/p/original" + this.posterPath,
             this.releaseDate,
             this.title,
             this.video,
@@ -69,4 +63,5 @@ data class RemoteMovie(
             this.voteCount
         )
     }
+
 }

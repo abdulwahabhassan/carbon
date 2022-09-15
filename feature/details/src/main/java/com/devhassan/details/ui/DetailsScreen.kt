@@ -29,16 +29,16 @@ fun DetailsScreen(
     getMovieDetails: (Long) -> Unit,
     detailsScreenUiState: DetailsScreenUiState
 ) {
-    LazyRow() {
-        items(listOf<DomainMovie>()) {
-            Card(onClick = {}) {
-                Column {
-                    Text(text = "Hello")
-                }
-            }
-
-        }
-    }
+//    LazyRow() {
+//        items(listOf<DomainMovie>()) {
+//            Card(onClick = {}) {
+//                Column {
+//                    Text(text = "Hello")
+//                }
+//            }
+//
+//        }
+//    }
 }
 
 @Composable

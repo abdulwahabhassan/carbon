@@ -11,9 +11,12 @@ import com.devhassan.data.repository.DetailsRepository
 import com.devhassan.data.repository.MoviesRepository
 import com.devhassan.details.model.DetailsScreenUiState
 import com.devhassan.model.DomainDetails
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailsScreenViewModel(
+@HiltViewModel
+class DetailsScreenViewModel @Inject constructor(
     private val detailsRepository: DetailsRepository
 ) : ViewModel() {
 

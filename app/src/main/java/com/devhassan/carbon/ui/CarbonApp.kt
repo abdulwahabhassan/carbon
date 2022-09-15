@@ -14,12 +14,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.devhassan.carbon.R
-import com.devhassan.carbon.theme.CarbonTheme
+import com.devhassan.carbon.navigation.CarbonNavHost
+import com.devhassan.designsystem.ui.theme.CarbonTheme
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun CarbonApp() {
-
+fun CarbonApp(
+    appState: CarbonAppState = rememberCarbonAppState()
+) {
     CarbonTheme {
         Scaffold(
             topBar = {
@@ -38,6 +40,10 @@ fun CarbonApp() {
                 }
             }
         ) {
+            CarbonNavHost(
+                navController = appState.navController,
+                onNavigateToDestination = appState::navigate
+            )
 
         }
     }
@@ -48,6 +54,5 @@ fun CarbonApp() {
 @Preview(showBackground = true)
 fun CarbonAppPreview() {
     CarbonApp()
-
 }
 

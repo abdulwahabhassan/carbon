@@ -1,4 +1,4 @@
-package com.devhassan.carbon.theme
+package com.devhassan.designsystem.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

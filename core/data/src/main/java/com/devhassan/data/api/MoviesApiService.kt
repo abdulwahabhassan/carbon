@@ -8,7 +8,7 @@ interface MoviesApiService {
 
     @GET(value = "movie/{category}")
     suspend fun getMovies(
-        @Path("category", encoded = true) category: String,
+        @Path("category") category: String,
         @Query("page") page: Int? = 1,
     ): com.devhassan.data.model.RemoteMoviesResponse
 

@@ -5,13 +5,13 @@ import androidx.navigation.compose.composable
 import com.devhassan.details.ui.DetailsRoute
 import com.devhassan.navigation.CarbonNavigationDestination
 
-object DetailsNavigation: CarbonNavigationDestination {
-    override val route = "movies_route"
-    override val destination = "movies_destination"
+object DetailsDestination: CarbonNavigationDestination {
+    override val route = "details_route"
+    override val destination = "details_destination"
 }
 
 fun NavGraphBuilder.detailsNavigationGraph() {
-    composable(route = DetailsNavigation.route) {
+    composable(route = DetailsDestination.route) {
         DetailsRoute()
     }
 }

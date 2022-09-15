@@ -10,9 +10,12 @@ import com.devhassan.common.result.ViewModelResult
 import com.devhassan.data.repository.MoviesRepository
 import com.devhassan.model.DomainMovie
 import com.devhassan.movies.model.MoviesScreenUiState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MoviesScreenViewModel(
+@HiltViewModel
+class MoviesScreenViewModel @Inject constructor(
     private val moviesRepository: MoviesRepository
 ) : ViewModel() {
 
@@ -23,7 +26,14 @@ class MoviesScreenViewModel(
         )
     )
 
+    init {
+        getMovies("popular")
+    }
+
     fun getMovies(category: String) {
+
+        moviesScreenUiState = moviesScreenUiState.copy(viewModelResult = ViewModelResult.LOADING)
+
         viewModelScope.launch {
             when (val result = moviesRepository.retrieveMovies(category)) {
                 is RepositoryResult.Error -> {

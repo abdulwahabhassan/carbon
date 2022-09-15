@@ -7,4 +7,6 @@ data class RemoteErrorResponse(
     var statusMessage: String?,
     @Json(name = "status_code")
     var statusCode: Int?,
+    @Json(name = "success")
+    var success: Boolean?,
 )
