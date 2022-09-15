@@ -1,4 +1,4 @@
-package com.devhassan.common.result
+package com.devhassan.network.model
 
 sealed class NetworkResult<out T> {
 

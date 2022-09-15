@@ -1,21 +1,21 @@
-package com.devhassan.data.repository
+package com.devhassan.network.util
 
-import com.devhassan.common.result.NetworkResult
-import com.devhassan.data.model.RemoteErrorResponse
 import com.devhassan.network.manager.NetworkConnectivityManager
+import com.devhassan.network.model.NetworkResult
+import com.devhassan.network.model.RemoteErrorResponse
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import timber.log.Timber
+import javax.inject.Inject
 
-@Suppress("UNCHECKED_CAST")
-open class BaseRepository {
-
+class NetworkRequestUtil @Inject constructor(
+    val dispatcher: CoroutineDispatcher,
+    private val networkConnectivityManager: NetworkConnectivityManager,
+) {
     suspend fun <T> coroutineHandler(
-        dispatcher: CoroutineDispatcher,
-        networkConnectivityManager: NetworkConnectivityManager,
         apiRequest: suspend () -> T
     ): NetworkResult<T> {
         return withContext(dispatcher) {
@@ -50,5 +50,4 @@ open class BaseRepository {
             null
         }
     }
-
 }

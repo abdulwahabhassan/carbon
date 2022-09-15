@@ -13,14 +13,17 @@ import com.devhassan.navigation.CarbonNavigationDestination
 fun CarbonNavHost(
     navController: NavHostController,
     onNavigateToDestination: (CarbonNavigationDestination, String) -> Unit,
-    startDestination: String = MoviesDestination.route
+    startDestination: String = MoviesDestination.route,
+    onLoadingStateActive: (Boolean) -> Unit
 ) {
 
     NavHost(
         navController = navController,
         startDestination = startDestination,
     ) {
-        moviesNavigationGraph()
+        moviesNavigationGraph(
+            onLoadingStateActive = onLoadingStateActive
+        )
         detailsNavigationGraph()
     }
 

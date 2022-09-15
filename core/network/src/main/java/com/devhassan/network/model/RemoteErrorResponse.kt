@@ -1,4 +1,4 @@
-package com.devhassan.data.model
+package com.devhassan.network.model
 
 import com.squareup.moshi.Json
 

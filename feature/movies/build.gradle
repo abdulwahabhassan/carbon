@@ -80,4 +80,5 @@ dependencies {
     debugImplementation 'androidx.customview:customview-poolingcontainer:1.0.0'
     debugImplementation 'androidx.customview:customview:1.1.0'
     implementation 'io.coil-kt:coil-compose:2.1.0'
+    implementation "androidx.paging:paging-compose:1.0.0-alpha16"
 }
