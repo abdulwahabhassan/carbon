@@ -7,7 +7,7 @@
   <a href="https://github.com/abdulwahabhassan/carbon/actions"><img alt="Build Status" src="https://github.com/abdulwahabhassan/carbon/workflows/Build/badge.svg"/></a> 
 </p>
 
-<p align="center">Carbon keeps you up to date with the latest trending movies</p>
+<p align="center">Carbon keeps you up to date with the latest and trending movies</p>
 
 ## Preview
 
