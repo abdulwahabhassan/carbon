@@ -51,7 +51,7 @@ data class RemoteMovie(
 
         return DomainMovie(
             this.adult,
-            this.backdropPath,
+            "https://image.tmdb.org/t/p/original" + this.backdropPath,
             this.id,
             this.originalLanguage,
             this.originalTitle,

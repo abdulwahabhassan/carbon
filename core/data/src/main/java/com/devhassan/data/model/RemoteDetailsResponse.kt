@@ -59,7 +59,7 @@ data class RemoteDetailsResponse(
     fun toDomainModel(): DomainDetails {
         return DomainDetails(
             this.adult,
-            this.backdropPath,
+            "https://image.tmdb.org/t/p/original" + this.backdropPath,
             this.budget,
             this.genres.map { remoteGenre -> remoteGenre.toDomainModel() },
             this.homepage,
@@ -69,7 +69,7 @@ data class RemoteDetailsResponse(
             this.originalTitle,
             this.overview,
             this.popularity,
-            this.posterPath,
+            "https://image.tmdb.org/t/p/original" + this.posterPath,
             this.productionCompanies.map { remoteProductionCompany ->
                 remoteProductionCompany.toDomainModel()
             },

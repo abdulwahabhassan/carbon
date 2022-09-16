@@ -22,6 +22,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -46,6 +47,7 @@ dependencies {
     implementation project(path: ':core:model')
     implementation project(path: ':core:data')
     implementation project(path: ':core:navigation')
+    implementation project(path: ':core:designsystem')
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'com.google.android.material:material:1.6.1'
@@ -72,4 +74,7 @@ dependencies {
     //Preview wasn't showing until I added these
     debugImplementation 'androidx.customview:customview-poolingcontainer:1.0.0'
     debugImplementation 'androidx.customview:customview:1.1.0'
+    implementation 'io.coil-kt:coil-compose:2.1.0'
+    //Timber
+    implementation "com.jakewharton.timber:timber:$timber_version"
 }

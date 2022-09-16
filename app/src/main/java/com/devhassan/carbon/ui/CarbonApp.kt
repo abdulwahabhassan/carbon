@@ -8,18 +8,24 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.KeyboardArrowLeft
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.devhassan.carbon.R
+import com.devhassan.designsystem.R
 import com.devhassan.carbon.navigation.CarbonNavHost
 import com.devhassan.designsystem.ui.theme.CarbonTheme
+import com.devhassan.designsystem.ui.theme.purple
+import com.devhassan.movies.navigation.MoviesDestination
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -42,7 +48,17 @@ fun CarbonApp(
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
+                        if (appState.currentDestination?.route != MoviesDestination.route) {
+                            Icon(
+                                imageVector = Icons.Rounded.ArrowBack,
+                                contentDescription = "Back arrow",
+                                tint = purple
+                            )
+                            Spacer(modifier = Modifier.width(24.dp))
+                        }
                         Icon(
+                            modifier = if (appState.currentDestination?.route != MoviesDestination.route)
+                                Modifier.width(70.dp) else Modifier,
                             painter = painterResource(id = R.drawable.carbon_logo),
                             contentDescription = "Carbon logo",
                             tint = Color.Unspecified

@@ -12,11 +12,11 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class NetworkRequestUtil @Inject constructor(
-    val dispatcher: CoroutineDispatcher,
     private val networkConnectivityManager: NetworkConnectivityManager,
 ) {
     suspend fun <T> coroutineHandler(
-        apiRequest: suspend () -> T
+        dispatcher: CoroutineDispatcher,
+        apiRequest: suspend () -> T,
     ): NetworkResult<T> {
         return withContext(dispatcher) {
             if (!networkConnectivityManager.isNetworkAvailable()) {

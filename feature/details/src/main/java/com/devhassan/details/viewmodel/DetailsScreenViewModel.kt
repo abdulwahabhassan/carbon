@@ -13,6 +13,7 @@ import com.devhassan.details.model.DetailsScreenUiState
 import com.devhassan.model.DomainDetails
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,9 +29,13 @@ class DetailsScreenViewModel @Inject constructor(
     )
 
     fun getMovieDetails(id: Long) {
+
+        detailsScreenUiState = detailsScreenUiState.copy(viewModelResult = ViewModelResult.LOADING)
+
         viewModelScope.launch {
             when (val result = detailsRepository.retrieveDetails(id)) {
                 is RepositoryResult.Error -> {
+                    Timber.d("Vm Remote Error Details -> ${result.message}")
                     detailsScreenUiState = DetailsScreenUiState(
                         ViewModelResult.ERROR,
                         null,
@@ -38,6 +43,7 @@ class DetailsScreenViewModel @Inject constructor(
                     )
                 }
                 is RepositoryResult.Local -> {
+                    Timber.d("Vm Remote Local Details -> ${result.data}")
                     detailsScreenUiState = DetailsScreenUiState(
                         ViewModelResult.SUCCESS,
                         result.data,
@@ -45,6 +51,7 @@ class DetailsScreenViewModel @Inject constructor(
                     )
                 }
                 is RepositoryResult.Remote -> {
+                    Timber.d("Vm Remote Success Details -> ${result.data}")
                     detailsScreenUiState = DetailsScreenUiState(
                         ViewModelResult.SUCCESS,
                         result.data

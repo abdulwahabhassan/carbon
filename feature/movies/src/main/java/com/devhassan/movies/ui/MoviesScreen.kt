@@ -125,7 +125,7 @@ fun MoviesScreen(
                                     .fillMaxWidth()
                                     .padding(horizontal = 4.dp, vertical = 4.dp),
                                 onClick = {
-                                    navigateToDetails(movieIndex.toString())
+                                    navigateToDetails(movies[movieIndex]?.id.toString())
                                 },
                                 shape = RoundedCornerShape(10.dp)
                             ) {
@@ -143,6 +143,7 @@ fun MoviesScreen(
                                             .background(color = lightGrey)
                                             .height(200.dp),
                                         contentScale = ContentScale.Crop
+
                                     )
                                     Column(
                                         modifier = Modifier
@@ -190,7 +191,7 @@ fun MoviesScreen(
                                             )
 
                                             Text(
-                                                text = movie.voteAverage.toString(),
+                                                text = String.format("%.1f", movie.voteAverage),
                                                 color = grey,
                                                 style = MaterialTheme.typography.subtitle1
                                             )
@@ -223,10 +224,6 @@ fun MoviesScreen(
                         text = it,
                         textAlign = TextAlign.Center,
                         modifier = Modifier
-                            .background(
-                                color = transparentPink,
-                                shape = RoundedCornerShape(50)
-                            )
                             .padding(vertical = 8.dp, horizontal = 12.dp),
                         color = red
                     )

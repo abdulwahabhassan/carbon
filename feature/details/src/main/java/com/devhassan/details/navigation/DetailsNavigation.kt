@@ -30,8 +30,8 @@ fun NavGraphBuilder.detailsNavigationGraph() {
         route = DetailsDestination.route,
         arguments = listOf(
             navArgument(DetailsDestination.movieIdArg) { type = NavType.StringType }
-        )) {
-        DetailsRoute()
+        )) { navBackstackEntry ->
+        DetailsRoute(movieId = navBackstackEntry.arguments?.getString(DetailsDestination.movieIdArg))
     }
 
 }

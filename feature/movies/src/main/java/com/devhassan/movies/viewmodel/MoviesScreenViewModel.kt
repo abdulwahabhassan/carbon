@@ -37,6 +37,7 @@ class MoviesScreenViewModel @Inject constructor(
         viewModelScope.launch {
             when (val result = moviesRepository.retrieveMovies(category)) {
                 is RepositoryResult.Error -> {
+                    Timber.d("Vm Remote Error Movies -> ${result.message}")
                     moviesScreenUiState = MoviesScreenUiState(
                         viewModelResult = ViewModelResult.ERROR,
                         message = result.message,
@@ -44,6 +45,7 @@ class MoviesScreenViewModel @Inject constructor(
                     )
                 }
                 is RepositoryResult.Local -> {
+                    Timber.d("Vm Local Success Movies -> ${result.data}")
                     moviesScreenUiState = MoviesScreenUiState(
                         ViewModelResult.SUCCESS,
                         result.data,
@@ -52,7 +54,7 @@ class MoviesScreenViewModel @Inject constructor(
                     )
                 }
                 is RepositoryResult.Remote -> {
-                    Timber.d("vm ${result.data.toString()}")
+                    Timber.d("Vm Remote Success Movies -> ${result.data}")
                     moviesScreenUiState = MoviesScreenUiState(
                         ViewModelResult.SUCCESS,
                         result.data,
