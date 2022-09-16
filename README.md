@@ -13,7 +13,7 @@
 
 |            |            |            |            |
 |------------|------------|------------|------------|
-| ![img one](movies.png) | ![img two](details.png) | ![img three](others_one.png) | ![img four](others_two.png) |
+| ![img one](movies.JPG) | ![img two](details.JPG) | ![img three](others_one.JPG) | ![img four](others_two.JPG) |
 
 ## Configurations
 - Minimum SDK level 23
