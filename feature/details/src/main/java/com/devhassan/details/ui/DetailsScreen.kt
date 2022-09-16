@@ -221,7 +221,7 @@ fun DetailsScreen(
                                     modifier = Modifier.fillMaxWidth(),
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    stickyHeader {
+                                    item {
                                         Icon(
                                             painter = painterResource(id = R.drawable.ic_genre),
                                             contentDescription = "Genres",
@@ -233,10 +233,33 @@ fun DetailsScreen(
                                     }
                                     items(detailsScreenUiState.movieDetails?.domainGenres?.map { it.name }
                                         ?: emptyList()) { item ->
+
+                                        val itemBgColor = listOf(
+                                            transparentBlue,
+                                            transparentGreen,
+                                            transparentPink,
+                                            transparentYellow,
+                                            transparentAsh,
+                                            transparentPurple
+                                        ).random()
                                         Text(
-                                            modifier = Modifier.padding(end = 8.dp),
+                                            modifier = Modifier
+                                                .padding(end = 8.dp)
+                                                .background(
+                                                    color = itemBgColor,
+                                                    shape = RoundedCornerShape(4.dp)
+                                                )
+                                                .padding(horizontal = 12.dp, vertical = 4.dp),
                                             text = item.capitalizeEachWord(),
-                                            color = grey,
+                                            color = when (itemBgColor) {
+                                                transparentBlue -> darkBlue
+                                                transparentGreen -> green
+                                                transparentPink -> red
+                                                transparentYellow -> yellow
+                                                transparentAsh -> black
+                                                transparentPurple -> purple
+                                                else -> grey
+                                            },
                                             style = MaterialTheme.typography.body1
                                         )
 
