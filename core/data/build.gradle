@@ -31,13 +31,13 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.0'
-    implementation 'com.google.android.material:material:1.6.1'
     implementation project(path: ':core:network')
     implementation project(path: ':core:network')
     implementation project(path: ':core:common')
     implementation project(path: ':core:model')
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.5.0'
+    implementation 'com.google.android.material:material:1.6.1'
     implementation project(path: ':core:database')
     implementation 'androidx.paging:paging-common-ktx:3.1.1'
     testImplementation 'junit:junit:4.13.2'
